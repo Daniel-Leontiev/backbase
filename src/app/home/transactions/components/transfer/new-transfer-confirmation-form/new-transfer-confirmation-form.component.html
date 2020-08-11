@@ -1,0 +1,69 @@
+<header>
+  <cmp-form-header
+    [iconTemplate]="icon"
+    title="Confirm Transfer">
+  </cmp-form-header>
+
+  <ng-template #icon>
+    <div class="icon"></div>
+  </ng-template>
+</header>
+
+<main>
+  <div class="message-container">
+    <span class="header">
+      Confirm transfer of
+    </span>
+    <span class="message" [class.error]="!isTransferAllowed">
+      {{transferToConfirm?.amount | currency: currencyConfig.currencyCode:'symbol':'1.2-2': locale}}
+    </span>
+  </div>
+
+  <div class="message-container">
+    <span class="header">
+      From Account
+    </span>
+    <span class="message">
+      {{fromAccount.name}} - {{fromAccount.amount | currency: currencyConfig.currencyCode:'symbol':'1.2-2': locale}}
+    </span>
+  </div>
+
+  <div class="message-container">
+    <span class="header">
+      To Account
+    </span>
+    <span class="message">
+      <cmp-merchant-logo
+        [merchant]="transferToConfirm?.toAccount"
+        [merchantLogo]="getMerchantLogo()">
+      </cmp-merchant-logo>
+      <span class="merchant">{{transferToConfirm?.toAccount}}</span>
+    </span>
+  </div>
+
+  <div *ngIf="!isTransferAllowed" class="message-container">
+    <span class="header error">
+      Transfer not allowed
+    </span>
+    <span class="message error">
+      Insufficient funds
+      or transaction will create an overdraft!
+    </span>
+  </div>
+</main>
+
+<footer>
+  <button
+    type="button"
+    class="close"
+    (click)="close.emit()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    [disabled]="!isTransferAllowed"
+    (click)="createTransfer.emit(transferToConfirm)">
+    Transfer
+  </button>
+</footer>

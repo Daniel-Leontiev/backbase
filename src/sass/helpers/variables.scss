@@ -1,0 +1,107 @@
+$variables: (
+  --color-input: var(--color-input),
+  --color-input-disabled: var(--color-input-disabled),
+
+  --color-header-primary: var(--color-header-primary),
+  --color-border-primary: var(--color-border-primary),
+  --color-border-secondary: var(--color-border-secondary),
+
+  --color-surface-primary: var(--color-surface-primary),
+  --color-surface-secondary: var(--color-surface-secondary),
+
+  --color-text-primary: var(--color-text-primary),
+  --color-text-secondary: var(--color-text-secondary),
+  --color-text-disabled: var(--color-text-disabled),
+  --color-text-accent-primary: var(--color-text-accent-primary),
+
+  --color-accent-primary: var(--color-accent-primary),
+  --color-accent-secondary: var(--color-accent-secondary),
+
+  --color-status-success: var(--color-status-success),
+  --color-status-warning: var(--color-status-warning),
+  --color-status-error: var(--color-status-error)
+);
+
+@function tvar($variable) {
+  @return map-get($variables, $variable);
+}
+
+@mixin initialize-default-theme() {
+  :root {
+    --color-input: #666666;
+    --color-input-disabled: #666666;
+
+    --color-header-primary: #0c8397;
+    --color-border-primary: #7b7b7b;
+    --color-border-secondary: #b3b3b3;
+
+    --color-surface-primary: #FFFFFF;
+    --color-surface-secondary: #D8D8D8;
+
+    --color-text-primary: #1c1c1c;
+    --color-text-secondary: #666666;
+    --color-text-disabled: #a7a9b1;
+    --color-text-accent-primary: #ffffff;
+
+    --color-accent-primary: #ee7033;
+    --color-accent-secondary: #ee8c48;
+
+    --color-status-success: #288500;
+    --color-status-warning: #FFD500;
+    --color-status-error: #E02D30;
+  }
+};
+
+// Fonts
+$assets-font-path: "../assets/fonts/";
+$font-family-primary: "Kanit";
+
+// Input Color
+$color-input: tvar(--color-input) !default;
+$color-input-disabled: tvar(--color-input-disabled) !default;
+
+// UI Header
+$color-header-primary: tvar(--color-header-primary) !default;
+$color-border-primary: tvar(--color-border-primary) !default;
+$color-border-secondary: tvar(--color-border-secondary) !default;
+
+// UI Surface
+$color-surface-primary: tvar(--color-surface-primary) !default;
+$color-surface-secondary: tvar(--color-surface-secondary) !default;
+
+// Text Colors
+$color-text-primary: tvar(--color-text-primary) !default;
+$color-text-secondary: tvar(--color-text-secondary) !default;
+$color-text-disabled: tvar(--color-text-disabled) !default;
+$color-text-accent-primary: tvar(--color-text-accent-primary) !default;
+
+// Accent Colors
+$color-accent-primary: tvar(--color-accent-primary) !default;
+$color-accent-secondary: tvar(--color-accent-secondary) !default;
+
+// Status colors
+$color-status-success: tvar(--color-status-success) !default;
+$color-status-warning: tvar(--color-status-warning) !default;
+$color-status-error: tvar(--color-status-error) !default;
+
+// Common
+$browser-context: 10; // Default
+$opacity-disabled: 0.4 !default;
+
+// Sizes
+$width-mobile: 768px !default;
+$width-tablet: 992px !default;
+
+// Media
+$media-mobile: "(max-width: #{$width-mobile - 1})" !default;
+$media-tablet: "(min-width: #{$width-mobile}) and (max-width: #{$width-tablet - 1})" !default;
+$media-mobile-tablet: "(max-width: #{$width-tablet - 1})" !default;
+$media-desktop: "(min-width: #{$width-tablet})" !default;
+
+// Spacing
+$spacing-xs: 0.8rem;           // 8px
+$spacing-s: $spacing-xs * 2;   // 16px
+$spacing-m: $spacing-xs * 3;   // 24px
+$spacing-l: $spacing-xs * 4;   // 32px
+$spacing-xl: $spacing-xs * 5;  // 40px
+$spacing-xxl: $spacing-xs * 8; // 64px

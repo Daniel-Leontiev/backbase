@@ -1,0 +1,31 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+$logo-size: 45px;
+$logo-avatar-size: 35px;
+
+:host {
+  .logo {
+    width: $logo-size;
+    height: $logo-size;
+    min-width: $logo-size;
+    min-height: $logo-size;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    background-size: contain;
+    display: flex;
+
+    .avatar {
+      @include primary-body();
+      width: $logo-avatar-size;
+      height: $logo-avatar-size;
+      border: 3px solid $color-border-primary;
+      border-radius: 21px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+  }
+}

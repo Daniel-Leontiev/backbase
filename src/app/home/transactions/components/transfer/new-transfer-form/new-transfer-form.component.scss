@@ -1,0 +1,86 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+:host {
+  background-color: $color-surface-primary;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  min-width: 280px;
+
+  header {
+    cmp-form-header {
+      ::ng-deep {
+        .icon {
+          background-image: url('../../../../../../assets/icons/arrows.png');
+          width: 28px;
+          height: 24px;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+
+  main {
+    padding: $spacing-s;
+
+    ::ng-deep {
+      ctrl-text-input {
+        .input-field-label {
+          @include secondary-header();
+          text-transform: uppercase;
+        }
+
+        .input-container {
+          input {
+            background: transparent !important;
+          }
+        }
+
+        &.amount {
+          .input-container {
+            input {
+              border: 0 !important;
+              border-bottom: 0 !important;
+            }
+
+            border-bottom: 1px solid $color-border-primary;
+          }
+
+          &.error {
+            .input-container {
+              border-bottom: 1px solid red;
+            }
+          }
+        }
+      }
+    }
+
+    .error {
+      @include primary-small-text($color-status-error);
+      margin-top: $spacing-xs;
+    }
+
+    ctrl-text-input + ctrl-text-input {
+      margin-top: $spacing-s;
+    }
+  }
+
+  footer {
+    padding: $spacing-s;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      width: 50%;
+
+      &.close {
+        background: red;
+      }
+    }
+
+    button + button {
+      margin-left: $spacing-xs;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .input-header-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+
+    .input-field-label {
+      @include primary-small-text();
+      font-weight: bold;
+    }
+  }
+
+  .input-container {
+    display: flex;
+
+    .input-icon {
+      @include secondary-body($color-input);
+      display: flex;
+      align-items: center;
+      min-width: 10px;
+      max-width: 10px;
+    }
+
+    input {
+      @include flat-input();
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &.error {
+    .input-header-label {
+      .input-field-label {
+        color: $color-status-error;
+      }
+    }
+
+    .input-container {
+      .input-icon {
+        @include secondary-body($color-status-error);
+      }
+
+      input {
+        color: $color-status-error;
+        border-bottom: 1px solid $color-status-error;
+      }
+    }
+  }
+}

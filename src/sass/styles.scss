@@ -1,0 +1,78 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+@import "fonts/fonts";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-size: 62.5%; //same as setting font size to 10px, https://www.designernews.co/stories/21395-rem-and-625-fontsize
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+
+  font-family: $font-family-primary;
+  font-size: 10px;
+  -webkit-font-feature-settings: "ccmp";
+  -moz-font-feature-settings: "ccmp";
+  -ms-font-feature-settings: "ccmp";
+  font-feature-settings: "ccmp";
+  -webkit-font-feature-settings: "locl";
+  -moz-font-feature-settings: "locl";
+  -ms-font-feature-settings: "locl";
+  font-feature-settings: "locl";
+  -webkit-font-kerning: normal;
+  -moz-font-kerning: normal;
+  -ms-font-kerning: normal;
+  font-kerning: normal;
+  -webkit-font-variant: common-ligatures;
+  -moz-font-variant: common-ligatures;
+  -ms-font-variant: common-ligatures;
+  font-variant: common-ligatures;
+}
+
+button {
+  @include secondary-body($color-text-accent-primary);
+  cursor: pointer;
+  outline: none;
+  background-color: $color-accent-primary;
+  border: 1px solid $color-accent-primary;
+  border-radius: 5px;
+  padding: $spacing-xs $spacing-l;
+
+  &:not(:disabled) {
+    &:focus,
+    &:hover {
+      background-color: $color-accent-secondary;
+    }
+    &:active {
+      background-color: $color-accent-primary;
+    }
+  }
+
+  &:disabled {
+    color: $color-text-disabled;
+    background-color: $color-input-disabled;
+    border: 1px solid $color-input-disabled;
+  }
+}
+
+input,
+textarea {
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+}
+
+input[type="text"], textarea {
+  @include placeholder() {
+    color: $color-text-disabled;
+  }
+}
+
+@include initialize-default-theme();

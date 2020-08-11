@@ -1,0 +1,25 @@
+<section>
+  <ctrl-text-input
+    placeholder="Search by typing..."
+    [(ngModel)]="filterBy">
+  </ctrl-text-input>
+
+  <div class="sorting-controls-container">
+    <span class="sorting-label">Sort By</span>
+
+    <div class="sorting-controls">
+      <button
+        *ngFor="let button of buttons"
+        type="button"
+        (click)="sortBy(button.key)">
+        <span class="sort-key desktop">{{button.value}}</span>
+        <span class="sort-key mobile">{{icons[button.value]}}</span>
+        <i
+          class="arrow"
+          [class.visible]="button.value === filter.sortKey"
+          [ngClass]="filter.sortOrder ? 'up' : 'down'">
+        </i>
+      </button>
+    </div>
+  </div>
+</section>

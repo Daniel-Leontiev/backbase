@@ -1,0 +1,53 @@
+<section class="desktop">
+  <div class="category" [style.backgroundColor]="categoryColor"></div>
+
+  <div class="date">
+    {{transaction.transactionDate | apiDate}}
+  </div>
+
+  <cmp-merchant-logo
+    [merchant]="transaction.merchant"
+    [merchantLogo]="merchantLogo">
+  </cmp-merchant-logo>
+
+  <div class="merchant">
+    <span class="name">
+      {{transaction.merchant}}
+    </span>
+    <span class="transfer-type">
+      {{transaction.transactionType}}
+    </span>
+  </div>
+
+  <div class="amount">
+    {{transaction.amount | currency: currencyConfig.currencyCode:'symbol':'1.2-2': locale}}
+  </div>
+</section>
+
+<section class="mobile">
+  <div class="category" [style.backgroundColor]="categoryColor"></div>
+
+  <div class="card">
+    <header>
+      <cmp-merchant-logo
+        [merchant]="transaction.merchant"
+        [merchantLogo]="merchantLogo">
+      </cmp-merchant-logo>
+
+      <div class="merchant">
+        <span class="name">
+          {{transaction.merchant}}
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <div class="date">
+        {{transaction.transactionDate | apiDate}}
+      </div>
+      <div class="amount">
+        {{transaction.amount | currency: currencyConfig.currencyCode:'symbol':'1.2-2': locale}}
+      </div>
+    </main>
+  </div>
+</section>

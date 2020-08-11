@@ -1,0 +1,68 @@
+<header>
+  <cmp-form-header
+    [iconTemplate]="icon"
+    title="Make a Transfer">
+  </cmp-form-header>
+
+  <ng-template #icon>
+    <div class="icon"></div>
+  </ng-template>
+</header>
+
+<main>
+  <ng-container [formGroup]="form">
+    <ctrl-text-input
+      label="From Account"
+      placeholder="{{fromAccount.name}} - {{fromAccount.amount | currency: currencyConfig.currencyCode:'symbol':'1.2-2': locale}}"
+      [formControlName]="formCtrlFromAccount">
+    </ctrl-text-input>
+
+    <ctrl-text-input
+      #textInput
+      label="To Account"
+      placeholder="Merchant Name"
+      [class.error]="isInputInvalid(formCtrlToAccount)"
+      [formControlName]="formCtrlToAccount">
+
+      <ng-template ctrlTemplate="{{textInput.errorTemplateName}}" [show]="isInputInvalid(formCtrlToAccount)">
+        <span class="error">
+          Valid input is alphanumeric, space, &- characters
+        </span>
+      </ng-template>
+    </ctrl-text-input>
+
+    <ctrl-text-input
+      #textInput
+      label="Amount"
+      placeholder="0.00"
+      class="amount"
+      [class.error]="isInputInvalid(formCtrlAmount)"
+      [formControlName]="formCtrlAmount">
+
+      <ng-template ctrlTemplate="{{textInput.iconTemplateName}}">{{currencySymbol}}</ng-template>
+
+      <ng-template ctrlTemplate="{{textInput.errorTemplateName}}" [show]="isInputInvalid(formCtrlAmount)">
+        <span class="error">
+          Only numeric values allowed: 345 | 345.22
+        </span>
+      </ng-template>
+    </ctrl-text-input>
+  </ng-container>
+</main>
+
+<footer>
+  <button
+    *ngIf="showCloseButton"
+    type="button"
+    class="close"
+    (click)="cancel()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    [disabled]="!form.valid"
+    (click)="confirmTransfer.emit(form.value)">
+    Submit
+  </button>
+</footer>

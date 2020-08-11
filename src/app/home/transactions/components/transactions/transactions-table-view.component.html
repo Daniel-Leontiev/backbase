@@ -1,0 +1,28 @@
+<header>
+  <cmp-form-header
+    [iconTemplate]="icon"
+    title="Recent Transactions">
+    <nav class="localization-controls" controls>
+      <button
+        *ngFor="let localeConfiguration of localeConfigurations"
+        type="button"
+        (click)="changeLocalization(localeConfiguration.localeCode)">
+        <span class="locale-label desktop">{{localeConfiguration.currencyFormatConfig.currencyCode}}</span>
+        <span class="locale-label mobile">{{localeConfiguration.currencyFormatConfig.currencySymbol}}</span>
+      </button>
+    </nav>
+  </cmp-form-header>
+
+  <ng-template #icon>
+    <div class="icon"></div>
+  </ng-template>
+</header>
+
+<main>
+  <cmp-transactions-table
+    [transactions]="(transactions$ | async)"
+    [merchantLogos]="(merchantLogos$ | async)"
+    [loading]="(loading$ | async)"
+    (filterTransactions)="filterTransactions($event)">
+  </cmp-transactions-table>
+</main>

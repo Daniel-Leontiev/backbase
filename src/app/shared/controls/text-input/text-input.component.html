@@ -1,0 +1,26 @@
+<div
+  *ngIf="label"
+  class="input-header-label">
+
+  <span class="input-field-label">
+    {{label}}
+  </span>
+</div>
+<div class="input-container">
+  <div *ngIf="isTemplateProvided(iconTemplateName)" class="input-icon">
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+  </div>
+
+  <input type="text"
+    #textInput
+    aria-label="text-input"
+    [disabled]="disabled"
+    [attr.maxlength]="maxLength"
+    [placeholder]="placeholder"
+    (input)="onInput()"
+    (blur)="onModelTouched()"/>
+</div>
+
+<ng-container *ngIf="showError">
+  <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+</ng-container>
