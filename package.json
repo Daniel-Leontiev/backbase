@@ -9,7 +9,8 @@
     "lint": "npm run lint-runner -- --ext .ts --ignore-path .gitignore src",
     "build": "npm run ng build",
     "test": "npm run ng test",
-    "e2e": "npm run ng e2e"
+    "e2e": "npm run ng e2e",
+    "deploy": "ng build --prod --base-href https://daniel-leontiev.github.io/backbase/ && angular-cli-ghpages --branch gh-pages"
   },
   "private": true,
   "dependencies": {
