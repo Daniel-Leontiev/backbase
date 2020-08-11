@@ -26,10 +26,11 @@ export function filterTransactionsByFilterEvent(transactions: Transaction[], fil
   return filterTransactionsByQuery(query.toLowerCase(), dateFormat, transactions)
     .sort((a: Transaction, b: Transaction) => {
       if (name) {
-        return (a[property] < b[property])
-          ? (order ? -1 : 1)
-          : (a[property] > b[property])
-            ? (order ? 1 : -1) : 0;
+        if (order) {
+          return a.merchant.localeCompare(b.merchant);
+        }
+
+        return b.merchant.localeCompare(a.merchant);
       }
 
       return order
