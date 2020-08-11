@@ -16,4 +16,10 @@ export class MerchantLogoComponent {
       ? getMerchantAvatar(this.merchant)
       : undefined;
   }
+
+  get logo(): any {
+    return this.merchantLogo
+      ? `url(${this.merchantLogo})`
+      : undefined;
+  }
 }
