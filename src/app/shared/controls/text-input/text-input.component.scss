@@ -32,6 +32,25 @@
       min-width: 100%;
       max-width: 100%;
     }
+
+
+    &.show-clear-button {
+      input {
+        min-width: unset;
+        border: 0 !important;
+        border-bottom: 0 !important;
+      }
+
+      border-bottom: 1px solid $color-border-primary;
+
+      button {
+        padding: 0 $spacing-xs;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: $color-text-secondary;
+      }
+    }
   }
 
   &.error {

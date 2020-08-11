@@ -6,7 +6,7 @@
     {{label}}
   </span>
 </div>
-<div class="input-container">
+<div class="input-container" [class.show-clear-button]="allowClear">
   <div *ngIf="isTemplateProvided(iconTemplateName)" class="input-icon">
     <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
   </div>
@@ -19,6 +19,13 @@
     [placeholder]="placeholder"
     (input)="onInput()"
     (blur)="onModelTouched()"/>
+
+  <button
+    *ngIf="allowClear"
+    type="button"
+    (click)="clear()">
+    X
+  </button>
 </div>
 
 <ng-container *ngIf="showError">

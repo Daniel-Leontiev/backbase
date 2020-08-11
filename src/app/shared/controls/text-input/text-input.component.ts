@@ -14,6 +14,7 @@ import { buildControlValueAccessorProvider } from '../../../core/controls/custom
 export class TextInputComponent extends CustomControl {
   @Input() maxLength = 200;
   @Input() label = '';
+  @Input() allowClear = false;
 
   @ViewChild('textInput', { static: true }) textInput: ElementRef<HTMLInputElement>;
 
@@ -44,6 +45,11 @@ export class TextInputComponent extends CustomControl {
 
   get iconTemplate(): TemplateRef<any> {
     return this.getTemplate(this.iconTemplateName);
+  }
+
+  clear(): void {
+    this.value = '';
+    this.CustomControlUpdateModel();
   }
 
   onInput(): void {
