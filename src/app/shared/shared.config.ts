@@ -5,6 +5,11 @@ export const initialCheckingAccount = {
   amount: 5824.76
 } as CheckingAccount;
 
+export const defaultCheckingAccount = {
+  name: 'Free Checking(4692)',
+  amount: 0
+} as CheckingAccount;
+
 export const minimumAccountBalance = -500;
 
 export function isAmountValid(amount: string): boolean {

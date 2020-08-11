@@ -50,6 +50,10 @@ export class TransactionsFacade {
     return this.localStorageService.checkingAccount;
   }
 
+  resetTestData(): void {
+    this.localStorageService.resetTestData();
+  }
+
   filterTransactions(filter: TransactionFilterEvent): void {
     this.filterTransactionsSource.next(filter);
   }

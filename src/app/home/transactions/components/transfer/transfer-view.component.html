@@ -25,6 +25,7 @@
     [transferToConfirm]="(newTransferConfirm$ | async)"
     [fromAccount]="(fromAccount$ | async)"
     [showCloseButton]="showCloseButton"
+    (resetTestData)="resetTestData()"
     (confirmTransfer)="confirmTransfer($event)"
     (close)="cancelTransfer()">
   </cmp-new-transfer-form>

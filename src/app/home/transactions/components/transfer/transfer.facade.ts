@@ -35,6 +35,10 @@ export class TransferFacade {
     this.transactionsFacade.createTransfer(toAccount, amount);
   }
 
+  resetTestData(): void {
+    this.transactionsFacade.resetTestData();
+  }
+
   reset(): void {
     this.newTransferConfirm$.next({ toAccount: null, amount: null });
   }

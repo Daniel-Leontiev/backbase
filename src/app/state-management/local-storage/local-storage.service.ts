@@ -8,7 +8,7 @@ import {
   readDataFromLocalStorage,
   loadMerchantImagesFromDtoData
 } from './local-storage.config';
-import { initialCheckingAccount } from '../../shared/shared.config';
+import { defaultCheckingAccount, initialCheckingAccount } from '../../shared/shared.config';
 import { Transaction } from '../transactions/transactions.model';
 import { TransactionDTOLoad } from './local-storage.model';
 import { CheckingAccount, MerchantLogo } from '../../shared/shared.model';
@@ -22,7 +22,7 @@ const localStorageCheckingAccountKey = 'sessionCheckingAccount';
 })
 export class LocalStorageService {
   private loadingSource = new BehaviorSubject<boolean>(false);
-  private checkingAccountSource = new BehaviorSubject<CheckingAccount>(initialCheckingAccount);
+  private checkingAccountSource = new BehaviorSubject<CheckingAccount>(defaultCheckingAccount);
   private transactionsSource = new BehaviorSubject<Transaction[]>([]);
   private merchantLogosSource = new BehaviorSubject<MerchantLogo>({});
 
@@ -39,6 +39,11 @@ export class LocalStorageService {
 
   get checkingAccount(): CheckingAccount {
     return this.checkingAccountSource.value;
+  }
+
+  resetTestData(): void {
+    localStorage.clear();
+    this.loadDataSource();
   }
 
   updateCheckingAccountAmount(amount: number): void {

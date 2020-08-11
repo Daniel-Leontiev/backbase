@@ -65,6 +65,10 @@ export class TransferViewComponent extends ScreenSizeMonitorComponent {
     this.transferFacade.createTransfer(transfer);
   }
 
+  resetTestData(): void {
+    this.transferFacade.resetTestData();
+  }
+
   // region Dialog control
 
   cancelTransfer(): void {

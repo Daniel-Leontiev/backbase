@@ -5,7 +5,9 @@
   </cmp-form-header>
 
   <ng-template #icon>
-    <div class="icon"></div>
+    <div class="icon"
+         (click)="resetTestData.emit()">
+    </div>
   </ng-template>
 </header>
 

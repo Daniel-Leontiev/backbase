@@ -23,6 +23,7 @@ export class NewTransferFormComponent extends CustomControlDestroyNotifier imple
   @Input() fromAccount: CheckingAccount;
   @Input() showCloseButton = false;
 
+  @Output() resetTestData = new EventEmitter<void>();
   @Output() confirmTransfer = new EventEmitter<Transfer>();
   @Output() close = new EventEmitter<void>();
 
