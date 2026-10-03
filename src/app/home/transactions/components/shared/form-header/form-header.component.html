@@ -1,0 +1,9 @@
+<header>
+  <ng-container *ngIf="iconTemplate">
+    <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+  </ng-container>
+
+  <span *ngIf="title" class="title">{{title}}</span>
+
+  <ng-content select="[controls]"></ng-content>
+</header>

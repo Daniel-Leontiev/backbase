@@ -1,0 +1,18 @@
+@import "helpers/mixins";
+
+:host {
+  @include form-header();
+
+  > header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .title {
+      @include secondary-header();
+      margin: auto;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,0 +1,115 @@
+@import "variables";
+@import "utils";
+
+@mixin placeholder() {
+  &::placeholder {
+    @content;
+  }
+
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin page-header() {
+  display: flex;
+  padding: $spacing-xs;
+  background-color: $color-surface-primary;
+  border-bottom: 1px solid $color-accent-primary;
+  height: 50px;
+}
+
+@mixin form-header() {
+  display: flex;
+  padding: $spacing-xs $spacing-s;
+  background-color: $color-header-primary;
+  height: 24px;
+}
+
+// Typography
+@mixin primary-header($color: $color-text-primary) {
+  color: $color;
+  font-family: $font-family-primary;
+  font-size: rem(32px);
+  line-height: 40px;
+}
+
+@mixin secondary-header($color: $color-text-accent-primary) {
+  color: $color;
+  font-family: $font-family-primary;
+  font-size: rem(14px);
+  line-height: 24px;
+}
+
+@mixin primary-body($color: $color-text-primary) {
+  color: $color;
+  font-family: $font-family-primary;
+  font-size: rem(16px);
+  line-height: 24px;
+}
+
+@mixin secondary-body($color: $color-text-primary) {
+  color: $color;
+  font-family: $font-family-primary;
+  font-size: rem(14px);
+  line-height: 24px;
+}
+
+@mixin global-input() {
+  border: 0;
+  border-bottom: 1px solid $color-border-primary;
+  background-color: transparent;
+  width: 100%;
+
+  &:focus,
+  &:hover,
+  &:active {
+    border-bottom: 1px solid $color-border-primary;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-text-disabled;
+  }
+}
+
+@mixin primary-small-text($color: $color-text-primary) {
+  color: $color;
+  font-family: $font-family-primary;
+  font-size: rem(11px);
+  line-height: 16px;
+  letter-spacing: 1px;
+}
+
+@mixin flat-input() {
+  @include secondary-body();
+  @include global-input();
+}
+
+@mixin badge() {
+  @include primary-small-text($color-text-accent-primary);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  background: $color-accent-secondary;
+  line-height: 24px;
+  padding: 0 $spacing-xs;
+}

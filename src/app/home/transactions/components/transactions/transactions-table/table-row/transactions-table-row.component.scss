@@ -1,0 +1,119 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+$category-width: 8px;
+$row-height: 55px;
+
+:host {
+  width: 100%;
+  background-color: $color-surface-primary;
+  border: 1px solid $color-border-secondary;
+  display: flex;
+
+  section {
+    height: $row-height;
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    .category {
+      width: $category-width;
+      min-width: $category-width;
+      height: 100%;
+    }
+
+    .date {
+      @include primary-body();
+      display: flex;
+      justify-content: center;
+      width: 80px;
+    }
+
+    .merchant {
+      display: flex;
+      flex-direction: column;
+      margin-left: $spacing-s;
+
+      .name {
+        @include primary-body();
+        font-weight: bold;
+        white-space: nowrap;
+        text-transform: capitalize;
+      }
+
+      .transfer-type {
+        @include primary-small-text();
+        white-space: nowrap;
+      }
+    }
+
+    .amount {
+      @include primary-body();
+      font-weight: bold;
+      margin-left: auto;
+      margin-right: $spacing-m;
+    }
+
+    // region Mobile
+
+    &.mobile {
+      height: 100px;
+
+      cmp-merchant-logo {
+        margin-left: $spacing-s;
+      }
+
+      .merchant {
+        margin-left: $spacing-xs;
+
+        .name {
+          white-space: unset;
+        }
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        header {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          border-bottom: 1px dashed $color-border-secondary;
+          padding-bottom: $spacing-xs;
+        }
+
+        main {
+          padding-top: $spacing-xs;
+          display: flex;
+          width: 100%;
+        }
+      }
+    }
+
+    // endregion
+  }
+
+  @media #{$media-desktop}, #{$media-tablet} {
+    section {
+      &.desktop {
+        display: flex;
+      }
+      &.mobile {
+        display: none;
+      }
+    }
+  }
+
+  @media #{$media-mobile} {
+    section {
+      &.desktop {
+        display: none;
+      }
+      &.mobile {
+        display: flex;
+      }
+    }
+  }
+}

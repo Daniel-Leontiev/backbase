@@ -1,0 +1,128 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+:host {
+  width: 100%;
+  display: flex;
+
+  section {
+    height: 42px;
+    padding: $spacing-xs $spacing-s;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    ctrl-text-input {
+      width: 100%;
+    }
+
+    .sorting-controls-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-left: $spacing-s;
+
+      .sorting-label {
+        @include primary-small-text();
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      .sorting-controls {
+        margin-left: $spacing-s;
+        display: flex;
+
+        button {
+          border-radius: 0;
+          background-color: $color-surface-primary;
+          border: 1px solid $color-border-secondary;
+          color: $color-text-primary;
+          line-height: 18px;
+          padding: rem(4px) $spacing-s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .sort-key {
+            @include primary-small-text();
+            white-space: nowrap;
+            text-transform: capitalize;
+
+            &.desktop {
+              display: block;
+            }
+
+            &.mobile {
+              display: none;
+            }
+          }
+
+          .arrow {
+            border: solid $color-border-primary;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 2px;
+            margin-left: rem(4px);
+            opacity: 0;
+
+            &.visible {
+              opacity: 1;
+            }
+
+            &.up {
+              transform: rotate(-135deg);
+              -webkit-transform: rotate(-135deg);
+              margin-top: 2px;
+            }
+
+            &.down {
+              transform: rotate(45deg);
+              -webkit-transform: rotate(45deg);
+              margin-top: -3px;
+            }
+          }
+        }
+
+        button + button {
+          border-left: 0;
+        }
+      }
+    }
+  }
+
+  @media #{$media-mobile} {
+    section {
+      flex-direction: column;
+      margin-bottom: $spacing-xs;
+
+      .sorting-controls-container {
+        margin-left: 0;
+        margin-top: $spacing-xs;
+        width: 100%;
+
+        .sorting-label {
+          display: none;
+        }
+
+        .sorting-controls {
+          margin-left: auto;
+
+          button {
+            padding: 2px 6px;
+
+            .sort-key {
+              &.desktop {
+                display: none;
+              }
+
+              &.mobile {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

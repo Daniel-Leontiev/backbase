@@ -1,0 +1,82 @@
+@import "helpers/variables";
+
+:host {
+  width: 100%;
+  background-color: $color-surface-primary;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    cmp-form-header {
+      ::ng-deep {
+        .icon {
+          background-image: url('../../../../../assets/icons/briefcase.png');
+          width: 28px;
+          height: 24px;
+          background-repeat: no-repeat;
+        }
+
+        .localization-controls {
+          display: flex;
+
+          button {
+            border-radius: 0;
+            background-color: $color-surface-primary;
+            border: 1px solid $color-border-secondary;
+            color: $color-text-primary;
+            line-height: 16px;
+            font-size: 1rem;
+            padding: 0 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$media-desktop}, #{$media-tablet} {
+    header {
+      cmp-form-header {
+        ::ng-deep {
+          .localization-controls {
+            button {
+              .locale-label {
+                &.desktop {
+                  display: block;
+                }
+
+                &.mobile {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$media-mobile} {
+    header {
+      cmp-form-header {
+        ::ng-deep {
+          .localization-controls {
+            button {
+              .locale-label {
+                &.desktop {
+                  display: none;
+                }
+
+                &.mobile {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

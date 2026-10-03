@@ -1,0 +1,89 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
+:host {
+  background-color: $color-surface-primary;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 280px;
+  min-width: 280px;
+  min-height: 331px;
+
+  header {
+    cmp-form-header {
+      ::ng-deep {
+        .icon {
+          background-image: url('../../../../../../assets/icons/arrows.png');
+          width: 28px;
+          height: 24px;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+
+  main {
+    padding: $spacing-s;
+    height: 100%;
+
+    .message-container {
+      display: flex;
+      flex-direction: column;
+
+      .header {
+        @include primary-small-text();
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &.error {
+          color: $color-status-error;
+        }
+      }
+
+      .message {
+        @include secondary-body();
+        padding-left: $spacing-xs;
+        display: flex;
+        align-items: center;
+
+        cmp-merchant-logo {
+          margin-right: $spacing-xs;
+        }
+
+        .merchant {
+          @include primary-body();
+          font-weight: bold;
+          white-space: nowrap;
+          text-transform: capitalize;
+        }
+
+        &.error {
+          color: $color-status-error;
+        }
+      }
+    }
+
+    .message-container + .message-container {
+      margin-top: $spacing-s;
+    }
+  }
+
+  footer {
+    padding: $spacing-s;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      width: 50%;
+
+      &.close {
+        background: red;
+      }
+    }
+
+    button + button {
+      margin-left: $spacing-xs;
+    }
+  }
+}
