@@ -307,17 +307,50 @@ npm run build
 
 ### Angular 14
 
-- Goal: upgrade from Angular 13 to Angular 14.
-- Command:
+- Goal: upgrade from Angular 13 to Angular 14 with the Angular 14 CLI migrations applied and the project validated on the upgraded toolchain.
+- Command used:
 
 ```powershell
-ng update @angular/core@14 @angular/cli@14 --force
+npx ng update @angular/core@14 @angular/cli@14 --allow-dirty --force
 ```
 
-- To document:
-  - package changes
-  - lint/build fixes
-  - template or API changes
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `14.3.0`
+  - `@angular/cli` updated to `14.2.13`
+  - `@angular-devkit/build-angular` updated to `14.2.13`
+  - `@angular/animations` updated to `14.3.0`
+  - `@angular/language-service` updated to `14.3.0`
+- CLI migration actions completed automatically:
+  - removed the `defaultProject` option from the workspace config
+  - removed deprecated browser builder options
+  - replaced `defaultCollection` with `schematicCollections`
+  - updated the TypeScript target to `ES2020` in `tsconfig.json`
+- Code migration applied automatically:
+  - updated `src/app/home/transactions/components/transfer/new-transfer-form/new-transfer-form.component.ts` to accommodate Angular 14 forms typing changes
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included Angular bundle generation and a final `Build at: ...` success timestamp
+  - the only remaining output was a non-blocking warning about CommonJS dependencies (`lodash` and `moment`) in the build, which does not stop the project from compiling
+
+#### Component migration example: NewTransferFormComponent
+
+The project contains a concrete example of the Angular 14 compatibility work in `src/app/home/transactions/components/transfer/new-transfer-form/new-transfer-form.component.ts`.
+
+- Angular 14 tightened form typing for reactive forms, so the component was migrated to `UntypedFormBuilder`, `UntypedFormControl`, and `UntypedFormGroup` instead of requiring full generic form typing at that stage of the project.
+- This was required because older validation code relied on runtime form-config patterns and the app had not yet been converted to the newer typed-forms model.
+- The app still uses `OnPush` change detection and keeps the update strategy compatible with Angular 14 by using `markForCheck()` when the localization stream emits, instead of forcing a full render cycle with `detectChanges()`.
+- The route configuration in `src/app/app-routing.module.ts` still uses `pathMatch: 'full'`, which is the valid Angular 14 route option, and the migration confirms that the stricter route typing is now enforced.
+- Angular 13 also removed the old `entryComponents` pattern. This project did not rely on that legacy API in the app code, but the migration confirmed it is no longer needed and the update had to leave that pattern behind as part of the move to modern Angular.
+
+This is a good example of a real component-level change: the app was not rewritten wholesale, but it had to adopt the modern Angular forms and change-detection conventions while preserving the same behavior.
+
+### Angular 15
 
 ### Angular 15
 

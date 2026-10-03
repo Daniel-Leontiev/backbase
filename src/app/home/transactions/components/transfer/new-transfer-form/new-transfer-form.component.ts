@@ -4,7 +4,7 @@ import {
   Output, SimpleChanges
 } from '@angular/core';
 import { CustomControlDestroyNotifier } from '../../../../../core/controls/custom-control-destroy-notifier';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isAccountNameValid, isAmountValid } from '../../../../../shared/shared.config';
 import { Transfer } from '../../../view/transactions-view.config';
 import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
@@ -27,7 +27,7 @@ export class NewTransferFormComponent extends CustomControlDestroyNotifier imple
   @Output() confirmTransfer = new EventEmitter<Transfer>();
   @Output() close = new EventEmitter<void>();
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   readonly formCtrlFromAccount = 'fromAccount';
   readonly formCtrlToAccount = 'toAccount';
@@ -36,7 +36,7 @@ export class NewTransferFormComponent extends CustomControlDestroyNotifier imple
   constructor(
     private i18nService: InternationalizationService,
     private changeDetectorRef: ChangeDetectorRef,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     super();
 
@@ -95,7 +95,7 @@ export class NewTransferFormComponent extends CustomControlDestroyNotifier imple
   }
 
   private validateAccountName(): ValidatorFn {
-    return ({ value }: FormControl): ValidationErrors | null => {
+    return ({ value }: UntypedFormControl): ValidationErrors | null => {
       if (!!value && !isAccountNameValid(value)) {
         return { data: true };
       }
@@ -105,7 +105,7 @@ export class NewTransferFormComponent extends CustomControlDestroyNotifier imple
   }
 
   private validateAmount(): ValidatorFn {
-    return ({ value }: FormControl): ValidationErrors | null => {
+    return ({ value }: UntypedFormControl): ValidationErrors | null => {
       if (!!value && !isAmountValid(value)) {
         return { data: true };
       }
