@@ -275,17 +275,35 @@ npm run build
 
 ### Angular 13
 
-- Goal: upgrade from Angular 12 to Angular 13.
-- Command:
+- Goal: upgrade from Angular 12 to Angular 13 with the CLI migrations applied and a clean build on the updated toolchain.
+- Command used:
 
 ```powershell
-ng update @angular/core@13 @angular/cli@13 --force
+npx ng update @angular/core@13 @angular/cli@13 --allow-dirty --force
 ```
 
-- To document:
-  - package updates and peer warnings
-  - any TypeScript or RxJS adjustment needs
-  - build/test output
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `13.4.0`
+  - `@angular/cli` updated to `13.3.11`
+  - `@angular-devkit/build-angular` updated to `13.3.11`
+  - `@angular/animations` updated to `13.4.0`
+  - `@angular/language-service` updated to `13.4.0`
+  - `typescript` updated from `4.3.5` to `4.6.4`
+- Angular CLI migration actions completed automatically:
+  - removed unsupported IE polyfills from `src/polyfills.ts`
+  - removed obsolete `angular.json` options
+  - updated `.gitignore` with `.angular/cache`
+  - updated the test teardown configuration in `src/test.ts`
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included the Angular 13 bundle generation and final `Build at: ...` success timestamp
+  - no blocking migration errors were present after the update
 
 ### Angular 14
 
