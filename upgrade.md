@@ -394,12 +394,36 @@ npm run build
 
 ### Angular 16
 
-- Goal: upgrade from Angular 15 to Angular 16.
-- Command:
+- Goal: upgrade from Angular 15 to Angular 16 with the CLI migration set applied and the project revalidated on the updated toolchain.
+- Command used:
 
 ```powershell
-ng update @angular/core@16 @angular/cli@16 --force
+npx ng update @angular/core@16 @angular/cli@16 --allow-dirty --force
 ```
+
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `16.2.12`
+  - `@angular/cli` updated to `16.2.16`
+  - `@angular-devkit/build-angular` updated to `16.2.16`
+  - `@angular/animations` updated to `16.2.12`
+  - `@angular/language-service` updated to `16.2.12`
+  - `zone.js` updated from `0.11.8` to `0.13.3`
+- Angular CLI migration actions completed automatically:
+  - removed legacy configuration entries for older Angular CLI defaults
+  - updated the server builder settings for the newer build optimizer defaults
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included Angular 16 bundle generation and a final `Build at: ...` success timestamp
+  - Angular CLI reported that some legacy Browserslist targets were ignored because ES5 output is no longer supported, which is expected for Angular 16
+  - the only remaining output was a non-blocking CommonJS optimization warning for `lodash` and `moment`
+
+### Angular 17
 
 - To document:
   - dependency and builder changes
