@@ -6,7 +6,8 @@ import { TransactionsFacade } from '../../../state-management/transactions/trans
 @Component({
   templateUrl: './transactions-view.component.html',
   styleUrls: ['./transactions-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TransactionsViewComponent extends ScreenSizeMonitorComponent {
   constructor(

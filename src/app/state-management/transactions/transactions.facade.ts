@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Transaction, TransactionFilterEvent } from './transactions.model';
-import { LocalStorageService } from '../local-storage/local-storage.service';
-import { map, tap } from 'rxjs/operators';
-import { CheckingAccount } from '../../shared/shared.model';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { isAmountInOverdraft, willAmountBeAnOverdraft } from '../../shared/shared.config';
-import { filterTransactionsByFilterEvent, transactionDefaultFilter } from './transactions.config';
+import { CheckingAccount } from '../../shared/shared.model';
 import { InternationalizationService } from '../internationalization/internationalization.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { filterTransactionsByFilterEvent, transactionDefaultFilter } from './transactions.config';
+import { Transaction, TransactionFilterEvent } from './transactions.model';
 
 @Injectable({
   providedIn: 'root'

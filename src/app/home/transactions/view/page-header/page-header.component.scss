@@ -1,9 +1,10 @@
-@import "../../../../../sass/helpers/mixins";
+@use "../../../../../sass/helpers/variables" as *;
+@use "../../../../../sass/helpers/mixins" as *;
 
 :host {
   @include page-header();
 
-  > header {
+  >header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,7 +31,7 @@
   }
 
   @media #{$media-desktop} {
-    > header {
+    >header {
       button {
         display: none;
       }
@@ -38,7 +39,7 @@
   }
 
   @media #{$media-mobile-tablet} {
-    > header {
+    >header {
       .logo {
         margin-left: $spacing-l;
       }
@@ -52,7 +53,7 @@
   }
 
   @media #{$media-mobile} {
-    > header {
+    >header {
       .logo {
         margin-left: $spacing-xs;
         width: 64px;

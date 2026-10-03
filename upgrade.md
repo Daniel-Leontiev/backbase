@@ -506,17 +506,67 @@ These are the two project changes that mattered most during the Angular 18 upgra
 
 ### Angular 19
 
-- Goal: upgrade from Angular 18 to Angular 19.
-- Command:
+- Goal: upgrade from Angular 18 to Angular 19 and stabilize the final dependency tree after a long multi-major upgrade path.
+- Command used:
 
 ```powershell
-ng update @angular/core@19 @angular/cli@19 --force
+npx ng update @angular/core@19 @angular/cli@19 --allow-dirty --force
 ```
 
-- To document:
-  - final dependency state
-  - any migration work needed for the newest Angular release
-  - final build/test summary
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `19.2.25`
+  - `@angular/cli` updated to `19.2.27`
+  - `@angular-devkit/build-angular` updated to `19.2.27`
+  - `@angular/animations` updated to `19.2.25`
+  - `@angular/language-service` updated to `19.2.25`
+  - `@angular/cdk` updated to `19.2.19`
+  - `zone.js` updated to `0.15.1`
+  - `typescript` updated to `5.8.3`
+- Angular CLI migration work completed automatically:
+  - accepted the Angular 19 builder configuration changes in `angular.json`
+  - updated the project to the current CLI toolchain defaults for Angular 19
+  - refreshed the generated Angular config for the modern application builder and browser options
+- Root cause issues encountered during the final upgrade and validation:
+  - the project still had an old `@types/node` package pinned to `13.13.1`, which is incompatible with TypeScript 5.8.3 and triggers the `TS2320` Buffer interface conflict
+  - the app had a stale Angular CDK version (`12.2.13`) left behind from the earlier partial upgrade path, which caused peer dependency conflicts during install
+  - the package tree also had legacy transitive typing drift from older `@types` packages during the multi-major migration sequence
+- Fixes applied:
+
+```json
+"@types/node": "^20.17.10",
+"@angular/cdk": "19.2.19",
+"ng-mocks": "^14.18.1"
+```
+
+and for the compatibility issues seen during earlier upgrades this repo kept the override block:
+
+```json
+"overrides": {
+  "@types/ws": "7.4.5",
+  "@types/eslint": "8.56.0",
+  "@types/estree": "1.0.9"
+}
+```
+
+- Project-wide code migration notes for Angular 19:
+  - `src/polyfills.ts` was corrected from the legacy `zone.js/dist/zone` import to `import 'zone.js';` when Angular 17 introduced the new package export layout
+  - `src/app/app.module.ts` uses the modern `provideHttpClient(withInterceptorsFromDi())` pattern for the Angular 18+ provider model
+  - the Sass layer was modernized to remove deprecated `@import` and old built-ins during the Angular 18/19 transition; the warnings from `@import` and `map-get`/`unitless` were resolved in favor of `@use` plus `map.get` / `math.is-unitless`
+  - the app also kept its `OnPush` flow and `markForCheck()` updates, rather than forcing render loops with `detectChanges()`, which helps keep the legacy view logic consistent across Angular majors
+- Validation performed:
+
+```powershell
+npm install --legacy-peer-deps
+npm run build
+```
+
+- Result:
+  - build succeeded after aligning the dependency tree
+  - Angular 19 bundle generation completed successfully
+  - final output included the production bundle summary and the build completed with only non-blocking CommonJS optimization warnings for `lodash` and `moment`
+  - no TypeScript or Sass deprecation errors remained at the end of the migration path
+
+This is the final major update point in the project. The repository is now aligned on Angular 19, with the migration notes documenting the dependency drift and the real build fixes that were required along the way.
 
 ## Appendix template
 

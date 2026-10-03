@@ -2,7 +2,8 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { CustomControlTemplateReference } from './custom-control-template.config';
 
 @Directive({
-  selector: '[ctrlTemplate]'
+  selector: '[ctrlTemplate]',
+  standalone: false
 })
 export class CustomControlTemplateDirective implements CustomControlTemplateReference {
   @Input('ctrlTemplate') name: string;

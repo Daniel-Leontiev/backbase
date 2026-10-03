@@ -1,9 +1,9 @@
-@import "helpers/mixins";
+@use "helpers/mixins" as *;
 
 :host {
   @include form-header();
 
-  > header {
+  >header {
     display: flex;
     align-items: center;
     justify-content: center;

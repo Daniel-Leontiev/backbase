@@ -5,9 +5,7 @@
     {{transaction.transactionDate | apiDate}}
   </div>
 
-  <cmp-merchant-logo
-    [merchant]="transaction.merchant"
-    [merchantLogo]="merchantLogo">
+  <cmp-merchant-logo [merchant]="transaction.merchant" [merchantLogo]="merchantLogo">
   </cmp-merchant-logo>
 
   <div class="merchant">
@@ -29,9 +27,7 @@
 
   <div class="card">
     <header>
-      <cmp-merchant-logo
-        [merchant]="transaction.merchant"
-        [merchantLogo]="merchantLogo">
+      <cmp-merchant-logo [merchant]="transaction.merchant" [merchantLogo]="merchantLogo">
       </cmp-merchant-logo>
 
       <div class="merchant">

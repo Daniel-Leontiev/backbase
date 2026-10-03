@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
       <ng-container *ngIf="job | async"></ng-container>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AsyncExecutorComponent {
   @Input() jobs: Array<Observable<any>> = [];

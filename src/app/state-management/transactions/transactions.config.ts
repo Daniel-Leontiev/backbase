@@ -1,5 +1,5 @@
-import { Transaction, TransactionFilterEvent } from './transactions.model';
 import { formatApiDate } from '../internationalization/api-date.config';
+import { Transaction, TransactionFilterEvent } from './transactions.model';
 
 export enum TransactionsSortKey {
   DATE = 'DATE',

@@ -1,5 +1,5 @@
-@import "variables";
-@import "utils";
+@use "variables" as *;
+@use "utils" as *;
 
 @mixin placeholder() {
   &::placeholder {

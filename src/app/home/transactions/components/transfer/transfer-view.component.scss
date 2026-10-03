@@ -1,11 +1,12 @@
-@import "helpers/variables";
+@use "helpers/variables" as *;
 
 :host {
   .transfer-form-desktop {
     display: flex;
   }
 
-  .transfer-form-mobile, .transfer-confirm-form {
+  .transfer-form-mobile,
+  .transfer-confirm-form {
     position: absolute;
     display: none;
     align-items: center;

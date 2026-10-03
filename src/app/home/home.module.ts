@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { HomeRoutingModule } from './home-routing.module';
-import { TransactionsModule } from './transactions/transactions.module';
-import { InternationalizationModule } from '../state-management/internationalization/internationalization.module';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { InternationalizationModule } from '../state-management/internationalization/internationalization.module';
+import { HomeRoutingModule } from './home-routing.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @NgModule({
   imports: [

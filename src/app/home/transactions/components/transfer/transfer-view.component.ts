@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { ScreenSizeMonitorComponent } from '../../../../core/screen/screen-size-monitor.component';
 import { filter, tap } from 'rxjs/operators';
+import { ScreenSizeMonitorComponent } from '../../../../core/screen/screen-size-monitor.component';
 import { ScreenSizeMonitorViewMode } from '../../../../core/screen/screen-size-monitor.config';
 import { ScreenService } from '../../../../core/screen/screen-size.service';
-import { TransferFacade } from './transfer.facade';
 import { Transfer } from '../../view/transactions-view.config';
+import { TransferFacade } from './transfer.facade';
 
 @Component({
   selector: 'cmp-transfer-view',
   templateUrl: './transfer-view.component.html',
   styleUrls: ['./transfer-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TransferViewComponent extends ScreenSizeMonitorComponent {
   readonly newTransferStart$ = this.transferFacade.newTransferStart$

@@ -1,5 +1,5 @@
-@import "helpers/variables";
-@import "helpers/mixins";
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
 
 $category-width: 8px;
 $row-height: 55px;
@@ -95,11 +95,13 @@ $row-height: 55px;
     // endregion
   }
 
-  @media #{$media-desktop}, #{$media-tablet} {
+  @media #{$media-desktop},
+  #{$media-tablet} {
     section {
       &.desktop {
         display: flex;
       }
+
       &.mobile {
         display: none;
       }
@@ -111,6 +113,7 @@ $row-height: 55px;
       &.desktop {
         display: none;
       }
+
       &.mobile {
         display: flex;
       }

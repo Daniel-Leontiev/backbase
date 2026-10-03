@@ -3,19 +3,20 @@ import {
   Component, EventEmitter, Input,
   Output
 } from '@angular/core';
-import { Transfer } from '../../../view/transactions-view.config';
-import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
+import { getKeyFromMerchantName } from '../../../../../shared/shared.config';
+import { CheckingAccount, MerchantLogo } from '../../../../../shared/shared.model';
 import {
   LocalizationCurrencyConfig
 } from '../../../../../state-management/internationalization/internationalization.config';
-import { CheckingAccount, MerchantLogo } from '../../../../../shared/shared.model';
-import { getKeyFromMerchantName } from '../../../../../shared/shared.config';
+import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
+import { Transfer } from '../../../view/transactions-view.config';
 
 @Component({
   selector: 'cmp-new-transfer-confirmation-form',
   templateUrl: './new-transfer-confirmation-form.component.html',
   styleUrls: ['./new-transfer-confirmation-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NewTransferConfirmationFormComponent {
   @Input() fromAccount: CheckingAccount;

@@ -9,7 +9,8 @@ import { buildControlValueAccessorProvider } from '../../../core/controls/custom
   providers: [
     buildControlValueAccessorProvider(TextInputComponent)
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TextInputComponent extends CustomControl {
   @Input() maxLength = 200;

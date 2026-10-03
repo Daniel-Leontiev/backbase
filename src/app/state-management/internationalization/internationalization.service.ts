@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ApiDateFormatType, formatApiDate } from './api-date.config';
 import {
   defaultLocalizationConfig, getLocalizationConfiguration, LocalizationCurrencyConfig,
   LocalizationDateFormatConfig
 } from './internationalization.config';
-import { ApiDateFormatType, formatApiDate } from './api-date.config';
 
 @Injectable({
   providedIn: 'root'

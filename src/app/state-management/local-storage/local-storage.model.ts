@@ -1,5 +1,5 @@
-import { Transaction, TransactionBase } from '../transactions/transactions.model';
 import { MerchantLogo } from '../../shared/shared.model';
+import { Transaction, TransactionBase } from '../transactions/transactions.model';
 
 export interface TransactionDTO extends TransactionBase {
   transactionDate: number;

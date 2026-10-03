@@ -1,6 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TextInputComponent } from './controls/text-input/text-input.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [

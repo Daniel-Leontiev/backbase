@@ -1,5 +1,6 @@
-@import "helpers/variables";
-@import "helpers/mixins";
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
+@use "helpers/utils" as *;
 
 :host {
   width: 100%;
@@ -84,7 +85,7 @@
           }
         }
 
-        button + button {
+        button+button {
           border-left: 0;
         }
       }

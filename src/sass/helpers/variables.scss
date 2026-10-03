@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $variables: (
   --color-input: var(--color-input),
   --color-input-disabled: var(--color-input-disabled),
@@ -23,7 +25,7 @@ $variables: (
 );
 
 @function tvar($variable) {
-  @return map-get($variables, $variable);
+  @return map.get($variables, $variable);
 }
 
 @mixin initialize-default-theme() {

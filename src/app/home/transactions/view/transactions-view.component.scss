@@ -1,4 +1,4 @@
-@import "helpers/variables";
+@use "helpers/variables" as *;
 
 :host {
   width: 100%;
@@ -21,8 +21,7 @@
   }
 
   @media #{$media-desktop} {
-    section {
-    }
+    section {}
   }
 
   @media #{$media-mobile-tablet} {

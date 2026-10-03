@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TransactionsFacade } from '../../../../state-management/transactions/transactions.facade';
-import { TransactionFilterEvent } from '../../../../state-management/transactions/transactions.model';
-import { InternationalizationService } from '../../../../state-management/internationalization/internationalization.service';
 import {
   getConfiguredLocales,
   LocalizationConfig
 } from '../../../../state-management/internationalization/internationalization.config';
+import { InternationalizationService } from '../../../../state-management/internationalization/internationalization.service';
+import { TransactionsFacade } from '../../../../state-management/transactions/transactions.facade';
+import { TransactionFilterEvent } from '../../../../state-management/transactions/transactions.model';
 
 @Component({
   selector: 'cmp-transactions-table-view',
   templateUrl: './transactions-table-view.component.html',
   styleUrls: ['./transactions-table-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TransactionsTableViewComponent {
   readonly loading$ = this.transactionsFacade.loading$;

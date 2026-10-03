@@ -1,4 +1,4 @@
-@import "helpers/variables";
+@use "helpers/variables" as *;
 
 :host {
   width: 100%;
@@ -11,7 +11,7 @@
     height: 100%;
     padding: $spacing-xs;
 
-    cmp-transactions-table-row + cmp-transactions-table-row {
+    cmp-transactions-table-row+cmp-transactions-table-row {
       border-top: 0;
     }
   }

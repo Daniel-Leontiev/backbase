@@ -5,7 +5,8 @@ import { getMerchantAvatar } from '../../../../../shared/shared.config';
   selector: 'cmp-merchant-logo',
   templateUrl: './merchant-logo.component.html',
   styleUrls: ['./merchant-logo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class MerchantLogoComponent {
   @Input() merchant: string;

@@ -1,6 +1,6 @@
-@import "helpers/variables";
-@import "helpers/mixins";
-@import "fonts/fonts";
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
+@use "fonts/fonts" as *;
 
 html,
 body {
@@ -46,10 +46,12 @@ button {
   padding: $spacing-xs $spacing-l;
 
   &:not(:disabled) {
+
     &:focus,
     &:hover {
       background-color: $color-accent-secondary;
     }
+
     &:active {
       background-color: $color-accent-primary;
     }
@@ -69,7 +71,8 @@ textarea {
   box-shadow: none;
 }
 
-input[type="text"], textarea {
+input[type="text"],
+textarea {
   @include placeholder() {
     color: $color-text-disabled;
   }

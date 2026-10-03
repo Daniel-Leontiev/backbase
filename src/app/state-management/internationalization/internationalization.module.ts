@@ -1,6 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ApiDatePipe } from './api-date.pipe';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [

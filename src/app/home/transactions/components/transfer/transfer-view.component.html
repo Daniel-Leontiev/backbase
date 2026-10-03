@@ -9,26 +9,20 @@
 
 <div #transferConfirmForm class="transfer-confirm-form">
   <div class="form-container">
-    <cmp-new-transfer-confirmation-form
-      [transferToConfirm]="(newTransferConfirm$ | async)"
-      [fromAccount]="(fromAccount$ | async)"
-      [isTransferAllowed]="(isTransferAllowed$ | async)"
-      [merchantLogos]="(merchantLogos$ | async)"
-      (createTransfer)="createTransfer($event)"
+    <cmp-new-transfer-confirmation-form [transferToConfirm]="(newTransferConfirm$ | async)"
+      [fromAccount]="(fromAccount$ | async)" [isTransferAllowed]="(isTransferAllowed$ | async)"
+      [merchantLogos]="(merchantLogos$ | async)" (createTransfer)="createTransfer($event)"
       (close)="closeTransferConfirmModal()">
     </cmp-new-transfer-confirmation-form>
   </div>
 </div>
 
 <ng-template #transferForm let-showCloseButton="showCloseButton">
-  <cmp-new-transfer-form
-    [transferToConfirm]="(newTransferConfirm$ | async)"
-    [fromAccount]="(fromAccount$ | async)"
-    [showCloseButton]="showCloseButton"
-    (resetTestData)="resetTestData()"
-    (confirmTransfer)="confirmTransfer($event)"
+  <cmp-new-transfer-form [transferToConfirm]="(newTransferConfirm$ | async)" [fromAccount]="(fromAccount$ | async)"
+    [showCloseButton]="showCloseButton" (resetTestData)="resetTestData()" (confirmTransfer)="confirmTransfer($event)"
     (close)="cancelTransfer()">
   </cmp-new-transfer-form>
 </ng-template>
 
-<async-executor [jobs]="[viewModeChanges$, newTransferConfirm$, newTransferStart$, newTransferComplete$]"></async-executor>
+<async-executor
+  [jobs]="[viewModeChanges$, newTransferConfirm$, newTransferStart$, newTransferComplete$]"></async-executor>

@@ -1,4 +1,4 @@
-@import "helpers/variables";
+@use "helpers/variables" as *;
 
 :host {
   width: 100%;
@@ -36,7 +36,8 @@
     }
   }
 
-  @media #{$media-desktop}, #{$media-tablet} {
+  @media #{$media-desktop},
+  #{$media-tablet} {
     header {
       cmp-form-header {
         ::ng-deep {

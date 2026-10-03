@@ -1,19 +1,20 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, tap } from 'rxjs/operators';
+import { CustomControlDestroyNotifier } from '../../../../../../core/controls/custom-control-destroy-notifier';
 import { convertEnumToArray, KeyValuePair } from '../../../../../../core/utils';
 import {
   transactionDefaultFilter,
   TransactionsSortKey, TransactionsSortKeyIcon
 } from '../../../../../../state-management/transactions/transactions.config';
 import { TransactionFilterEvent } from '../../../../../../state-management/transactions/transactions.model';
-import { Subject } from 'rxjs';
-import { debounceTime, tap } from 'rxjs/operators';
-import { CustomControlDestroyNotifier } from '../../../../../../core/controls/custom-control-destroy-notifier';
 
 @Component({
   selector: 'cmp-transactions-table-controls',
   templateUrl: './transactions-table-controls.component.html',
   styleUrls: ['./transactions-table-controls.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TransactionsTableControlsComponent extends CustomControlDestroyNotifier {
   @Output() filterTransactions = new EventEmitter<TransactionFilterEvent>();

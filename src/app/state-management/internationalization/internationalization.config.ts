@@ -1,9 +1,9 @@
 import { registerLocaleData } from '@angular/common';
-import localeUS from '@angular/common/locales/es-US';
-import localeUSExtra from '@angular/common/locales/extra/es-US';
 import localeGB from '@angular/common/locales/en-GB';
-import localeGBExtra from '@angular/common/locales/extra/en-GB';
+import localeUS from '@angular/common/locales/es-US';
 import localeEU from '@angular/common/locales/eu';
+import localeGBExtra from '@angular/common/locales/extra/en-GB';
+import localeUSExtra from '@angular/common/locales/extra/es-US';
 import localeEUExtra from '@angular/common/locales/extra/eu';
 
 export interface LocalizationData {

@@ -1,5 +1,5 @@
-@import "helpers/variables";
-@import "helpers/mixins";
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
 
 :host {
   background-color: $color-surface-primary;
@@ -64,7 +64,7 @@
       }
     }
 
-    .message-container + .message-container {
+    .message-container+.message-container {
       margin-top: $spacing-s;
     }
   }
@@ -82,7 +82,7 @@
       }
     }
 
-    button + button {
+    button+button {
       margin-left: $spacing-xs;
     }
   }

@@ -1,5 +1,5 @@
-@import "helpers/variables";
-@import "helpers/mixins";
+@use "helpers/variables" as *;
+@use "helpers/mixins" as *;
 
 :host {
   background-color: $color-surface-primary;
@@ -61,7 +61,7 @@
       margin-top: $spacing-xs;
     }
 
-    ctrl-text-input + ctrl-text-input {
+    ctrl-text-input+ctrl-text-input {
       margin-top: $spacing-s;
     }
   }
@@ -79,7 +79,7 @@
       }
     }
 
-    button + button {
+    button+button {
       margin-left: $spacing-xs;
     }
   }

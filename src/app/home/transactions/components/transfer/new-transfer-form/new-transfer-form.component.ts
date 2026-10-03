@@ -3,20 +3,21 @@ import {
   Component, EventEmitter, Input, OnChanges,
   Output, SimpleChanges
 } from '@angular/core';
-import { CustomControlDestroyNotifier } from '../../../../../core/controls/custom-control-destroy-notifier';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { tap } from 'rxjs/operators';
+import { CustomControlDestroyNotifier } from '../../../../../core/controls/custom-control-destroy-notifier';
 import { isAccountNameValid, isAmountValid } from '../../../../../shared/shared.config';
-import { Transfer } from '../../../view/transactions-view.config';
-import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
 import { CheckingAccount } from '../../../../../shared/shared.model';
 import { LocalizationCurrencyConfig } from '../../../../../state-management/internationalization/internationalization.config';
-import { tap } from 'rxjs/operators';
+import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
+import { Transfer } from '../../../view/transactions-view.config';
 
 @Component({
   selector: 'cmp-new-transfer-form',
   templateUrl: './new-transfer-form.component.html',
   styleUrls: ['./new-transfer-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NewTransferFormComponent extends CustomControlDestroyNotifier implements OnChanges {
   @Input() transferToConfirm: Transfer;

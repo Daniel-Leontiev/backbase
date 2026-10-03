@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   selector: 'cmp-page-header',
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PageHeaderComponent {
   @Output() createTransfer = new EventEmitter<void>();

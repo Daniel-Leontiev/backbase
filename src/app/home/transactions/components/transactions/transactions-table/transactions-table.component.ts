@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Transaction, TransactionFilterEvent } from '../../../../../state-management/transactions/transactions.model';
-import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
-import { LocalizationCurrencyConfig } from '../../../../../state-management/internationalization/internationalization.config';
-import { MerchantLogo } from '../../../../../shared/shared.model';
 import { getKeyFromMerchantName } from '../../../../../shared/shared.config';
+import { MerchantLogo } from '../../../../../shared/shared.model';
+import { LocalizationCurrencyConfig } from '../../../../../state-management/internationalization/internationalization.config';
+import { InternationalizationService } from '../../../../../state-management/internationalization/internationalization.service';
+import { Transaction, TransactionFilterEvent } from '../../../../../state-management/transactions/transactions.model';
 
 @Component({
   selector: 'cmp-transactions-table',
   templateUrl: './transactions-table.component.html',
   styleUrls: ['./transactions-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TransactionsTableComponent {
   @Input() transactions: Transaction[] = [];

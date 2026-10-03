@@ -1,7 +1,7 @@
 import { getKeyFromMerchantName } from '../../shared/shared.config';
-import { NormalizedDataStore, TransactionDTO, TransactionDTOLoad } from './local-storage.model';
-import { Transaction } from '../transactions/transactions.model';
 import { MerchantLogo } from '../../shared/shared.model';
+import { Transaction } from '../transactions/transactions.model';
+import { NormalizedDataStore, TransactionDTO, TransactionDTOLoad } from './local-storage.model';
 
 export function normalizeDtoData({ data: transactionsDto }: TransactionDTOLoad): NormalizedDataStore {
   return transactionsDto.reduce((collector: NormalizedDataStore, transactionDto: TransactionDTO) => {

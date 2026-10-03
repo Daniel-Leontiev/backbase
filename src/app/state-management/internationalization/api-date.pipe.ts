@@ -3,7 +3,8 @@ import { ApiDateFormatType } from './api-date.config';
 import { InternationalizationService } from './internationalization.service';
 
 @Pipe({
-  name: 'apiDate'
+  name: 'apiDate',
+  standalone: false
 })
 export class ApiDatePipe implements PipeTransform {
   constructor(

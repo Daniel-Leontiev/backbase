@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
   selector: 'cmp-form-header',
   templateUrl: './form-header.component.html',
   styleUrls: ['./form-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FormHeaderComponent {
   @Input() iconTemplate: TemplateRef<any>;

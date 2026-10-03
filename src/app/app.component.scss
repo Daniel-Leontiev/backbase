@@ -1,4 +1,4 @@
-@import "helpers/variables";
+@use "helpers/variables" as *;
 
 :host {
   display: flex;
@@ -14,7 +14,7 @@
     overflow-y: auto;
 
     ::ng-deep {
-      > router-outlet + * {
+      >router-outlet+* {
         overflow-y: auto;
       }
     }

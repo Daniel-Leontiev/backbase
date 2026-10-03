@@ -1,5 +1,4 @@
-<cmp-transactions-table-controls
-  (filterTransactions)="filterTransactions.emit($event)">
+<cmp-transactions-table-controls (filterTransactions)="filterTransactions.emit($event)">
 </cmp-transactions-table-controls>
 
 <main>
@@ -9,11 +8,7 @@
 </main>
 
 <ng-template #transactionsTable>
-  <cmp-transactions-table-row
-    *ngFor="let transaction of transactions"
-    [transaction]="transaction"
-    [currencyConfig]="currencyConfig"
-    [merchantLogo]="getMerchantLogo(transaction)"
-    [locale]="locale">
+  <cmp-transactions-table-row *ngFor="let transaction of transactions" [transaction]="transaction"
+    [currencyConfig]="currencyConfig" [merchantLogo]="getMerchantLogo(transaction)" [locale]="locale">
   </cmp-transactions-table-row>
 </ng-template>

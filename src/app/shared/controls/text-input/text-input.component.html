@@ -1,6 +1,4 @@
-<div
-  *ngIf="label"
-  class="input-header-label">
+<div *ngIf="label" class="input-header-label">
 
   <span class="input-field-label">
     {{label}}
@@ -11,19 +9,10 @@
     <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
   </div>
 
-  <input type="text"
-    #textInput
-    aria-label="text-input"
-    [disabled]="disabled"
-    [attr.maxlength]="maxLength"
-    [placeholder]="placeholder"
-    (input)="onInput()"
-    (blur)="onModelTouched()"/>
+  <input type="text" #textInput aria-label="text-input" [disabled]="disabled" [attr.maxlength]="maxLength"
+    [placeholder]="placeholder" (input)="onInput()" (blur)="onModelTouched()" />
 
-  <button
-    *ngIf="allowClear"
-    type="button"
-    (click)="clear()">
+  <button *ngIf="allowClear" type="button" (click)="clear()">
     X
   </button>
 </div>
