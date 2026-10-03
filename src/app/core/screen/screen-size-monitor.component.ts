@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, HostBinding, OnInit } from '@angular/core';
-import { startWith, tap } from 'rxjs/operators';
-import { getScreenSizeViewMode, ScreenSizeMonitorViewMode } from './screen-size-monitor.config';
-import { CustomControlDestroyNotifier } from '../controls/custom-control-destroy-notifier';
-import { ScreenService } from './screen-size.service';
+import { ChangeDetectorRef, Directive, HostBinding, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { startWith, tap } from 'rxjs/operators';
+import { CustomControlDestroyNotifier } from '../controls/custom-control-destroy-notifier';
+import { getScreenSizeViewMode, ScreenSizeMonitorViewMode } from './screen-size-monitor.config';
+import { ScreenService } from './screen-size.service';
 
+@Directive()
 export abstract class ScreenSizeMonitorComponent extends CustomControlDestroyNotifier implements OnInit {
   private viewModeSource = new BehaviorSubject<ScreenSizeMonitorViewMode>(getScreenSizeViewMode(window.innerWidth));
 

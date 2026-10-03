@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { TransactionsFacade } from '../../../state-management/transactions/transactions.facade';
 import { ScreenSizeMonitorComponent } from '../../../core/screen/screen-size-monitor.component';
 import { ScreenService } from '../../../core/screen/screen-size.service';
+import { TransactionsFacade } from '../../../state-management/transactions/transactions.facade';
 
 @Component({
   templateUrl: './transactions-view.component.html',
@@ -15,6 +15,12 @@ export class TransactionsViewComponent extends ScreenSizeMonitorComponent {
     private transactionsFacade: TransactionsFacade
   ) {
     super(screenService, changeDetectorRef);
+    console.log('TransactionsViewComponent constructed');
+  }
+
+  ngOnDestroy(): void {
+    console.log('TransactionsViewComponent destroyed');
+    super.ngOnDestroy();
   }
 
   startNewTransfer(): void {

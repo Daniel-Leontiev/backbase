@@ -1,6 +1,4 @@
 {
   "workbench.colorTheme": "Super One Dark",
-  "files.exclude": {
-    "**/.git": false
-  }
+  "files.exclude": {}
 }

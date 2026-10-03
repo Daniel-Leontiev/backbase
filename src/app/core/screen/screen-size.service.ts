@@ -1,7 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
 
 interface ResizeEvent {
   target: {

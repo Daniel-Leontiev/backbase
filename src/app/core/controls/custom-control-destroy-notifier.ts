@@ -1,7 +1,9 @@
-import { OnDestroy } from '@angular/core';
-import { Subject, SubscriptionLike } from 'rxjs';
+import { Directive, OnDestroy } from '@angular/core';
 import _ from 'lodash';
+import { Subject, SubscriptionLike } from 'rxjs';
 
+// TODO: Add Angular decorator.
+@Directive()
 export class CustomControlDestroyNotifier implements OnDestroy {
   protected destroy$ = new Subject<void>();
 

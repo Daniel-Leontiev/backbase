@@ -5,6 +5,8 @@
 /out-tsc
 junit-test-results.xml
 
+/dist
+
 # dependencies
 /node_modules
 
