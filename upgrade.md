@@ -354,12 +354,38 @@ This is a good example of a real component-level change: the app was not rewritt
 
 ### Angular 15
 
-- Goal: upgrade from Angular 14 to Angular 15.
-- Command:
+- Goal: upgrade from Angular 14 to Angular 15 with the Angular CLI migration set applied and the project revalidated on the updated toolchain.
+- Command used:
 
 ```powershell
-ng update @angular/core@15 @angular/cli@15 --force
+npx ng update @angular/core@15 @angular/cli@15 --allow-dirty --force
 ```
+
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `15.2.10`
+  - `@angular/cli` updated to `15.2.11`
+  - `@angular-devkit/build-angular` updated to `15.2.11`
+  - `@angular/animations` updated to `15.2.10`
+  - `@angular/language-service` updated to `15.2.10`
+  - `typescript` updated from `4.6.4` to `4.9.5`
+- Angular CLI migration actions completed automatically:
+  - updated `src/test.ts` to remove no-longer-needed Karma builder calls
+  - updated the TypeScript target and `useDefineForClassFields` settings in `tsconfig.json`
+  - removed legacy Router config entries for `relativeLinkResolution`
+  - replaced deprecated `RouterLinkWithHref` references with `RouterLink`
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included the Angular 15 bundle generation and a final `Build at: ...` success timestamp
+  - Angular CLI reported that some older Browserslist browsers were ignored because ES5 output is no longer supported, which is expected for Angular 15
+  - the only warnings left were non-blocking CommonJS optimization warnings for `lodash` and `moment`
+
+### Angular 16
 
 - To document:
   - package updates
