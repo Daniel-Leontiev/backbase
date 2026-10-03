@@ -462,17 +462,47 @@ npm run build
 
 ### Angular 18
 
-- Goal: upgrade from Angular 17 to Angular 18.
-- Command:
+- Goal: upgrade from Angular 17 to Angular 18 and accept the Angular CLI’s optional build-system migration for the new application builder.
+- Command used:
 
 ```powershell
-ng update @angular/core@18 @angular/cli@18 --force
+npx ng update @angular/core@18 @angular/cli@18 --allow-dirty --force
 ```
 
-- To document:
-  - package changes
-  - runtime or build adjustments
-  - final validation output
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `18.2.14`
+  - `@angular/cli` updated to `18.2.21`
+  - `@angular-devkit/build-angular` updated to `18.2.21`
+  - `@angular/animations` updated to `18.2.14`
+  - `@angular/language-service` updated to `18.2.14`
+- Optional Angular CLI migration accepted:
+  - migrated application projects to the new Angular build system (`application` builder)
+  - updated the build output location from `dist` to `dist/browser` in the Angular config
+  - refreshed the TypeScript and Angular config defaults in `angular.json` and `tsconfig.json`
+- Angular core migration actions completed automatically:
+  - updated deprecated HTTP provider usage in `src/app/app.module.ts` by replacing the older module-based setup with the Angular 18 provider function `provideHttpClient(withInterceptorsFromDi())`
+  - this reflects the move away from the legacy `HttpClientModule` pattern into the newer DI-based provider configuration
+- Angular CLI build-system migration completed automatically:
+  - transformed the app builder to `@angular-devkit/build-angular:application`
+  - moved the browser build to the new `outputPath.base`/`browser` layout under `angular.json`
+  - kept the application config aligned with the newer Angular build system introduced in v18
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included the Angular 18 bundle generation and successful final output location summary
+  - the only remaining output was a non-blocking CommonJS optimization warning for `lodash` and `moment`
+
+#### Project-level migration notes
+
+These are the two project changes that mattered most during the Angular 18 upgrade:
+
+- `src/app/app.module.ts`: Angular 18 removed the old module-based HTTP pattern. The app was modernized to use `provideHttpClient(withInterceptorsFromDi())`, which keeps the configuration in the provider layer instead of relying on the deprecated module registration path.
+- `angular.json`: Angular 18’s CLI migration converted the app to the new `application` builder and updated the output configuration to the modern browser/app layout. This is not a functional change to the project logic, but it is a major build-system change that must be accepted when upgrading to Angular 18.
 
 ### Angular 19
 
