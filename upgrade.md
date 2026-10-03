@@ -109,18 +109,102 @@ npm run build
 
 ### Angular 11
 
-- Goal: upgrade from Angular 10 to Angular 11.
-- Command:
+- Goal: upgrade from Angular 10 to Angular 11 with a fully consistent Angular toolchain.
+- Command used:
 
 ```powershell
 ng update @angular/core@11 @angular/cli@11 --force
 ```
 
-- To document:
-  - dependency versions after the update
-  - any peer conflicts or warnings
-  - build or test output
-  - code changes required for TypeScript, compiler, or template API differences
+- Resulting dependency state after the upgrade attempt:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, and `@angular/compiler` updated to `11.2.14`
+  - `@angular/cli` updated to `11.2.19`
+  - `@angular-devkit/build-angular` updated to `0.1102.19`
+  - `@angular/compiler-cli` updated to `11.2.14`
+  - `@angular/cdk` was left behind at `10.2.7` in the project and later corrected to the Angular 11 major
+  - `typescript` remained at `4.0.8`
+  - `karma` remained on `~6.4.4`
+- Error encountered during install after the upgrade attempt:
+
+```text
+npm error code ERESOLVE
+npm error While resolving: customer-portal-app@0.0.1
+npm error Found: @angular-devkit/build-angular@0.1002.4
+npm error node_modules/@angular-devkit/build-angular
+npm error   dev @angular-devkit/build-angular@"0.1102.19" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error dev @angular-devkit/build-angular@"0.1102.19" from the root project
+npm error
+npm error Conflicting peer dependency: @angular/compiler-cli@11.2.14
+npm error node_modules/@angular/compiler-cli
+npm error   peer @angular/compiler-cli@"^11.0.0 || ^11.2.0-next" from @angular-devkit/build-angular@0.1102.19
+```
+
+- Root cause:
+  - the repo had a mixed Angular 10/11 dependency tree
+  - stale Angular 10 build-tooling remained in the project
+  - the Angular CLI, compiler, build-angular package, and CDK were not aligned as a single toolchain
+  - the project had also picked up a newer transitive `@types/ws` package from Karma/Socket.IO
+- TypeScript error discovered after the dependency fix:
+
+```text
+Error: node_modules/@types/ws/index.d.ts:336:18 - error TS2315: Type 'Server' is not generic.
+Error: node_modules/@types/ws/index.d.ts:336:34 - error TS2315: Type 'Server' is not generic.
+```
+
+- Diagnosis:
+  - `@types/ws` from `socket.io` / `engine.io` had become too new for the project’s TypeScript 4.0.8
+  - the generated type definitions used a generic `HTTPServer<V>`, which is not valid in the older TypeScript compiler version
+- Fix applied:
+
+```json
+"overrides": {
+  "@types/ws": "7.4.5"
+}
+```
+
+and in the final manifest this was pinned explicitly in devDependencies as:
+
+```json
+"@types/ws": "7.4.5"
+```
+
+- Build validation after fix:
+
+```powershell
+npm install
+npm ls @types/ws --depth=5
+npm run build
+```
+
+- Verification result:
+
+```text
+customer-portal-app@0.0.1 C:\Projects\Angular\backbase-master
+└─┬ karma@6.4.4
+  └─┬ socket.io@4.8.4
+    └─┬ engine.io@6.6.11
+      └── @types/ws@7.4.5 overridden
+```
+
+and then:
+
+```text
+> customer-portal-app@0.0.1 build
+> npm run ng build
+
+✔ Browser application bundle generation complete.
+✔ ES5 bundle generation complete.
+✔ Copying assets complete.
+✔ Index html generation complete.
+Build at: 2026-10-03T18:54:30.626Z - Hash: fb2a8f9bf30a1c13f4c3 - Time: 21833ms
+```
+
+- Final note:
+  - the Angular 11 upgrade is working in the repo after version alignment and the `@types/ws` override
+  - one non-blocking warning remains about `lodash` being a CommonJS dependency and causing optimization bailouts
+  - that warning does not block the app from building
 
 ### Angular 12
 
@@ -265,3 +349,4 @@ npm run build
 ```
 
 This keeps the historical upgrade record clear while leaving the original notes intact.
+```
