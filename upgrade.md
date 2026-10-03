@@ -208,18 +208,70 @@ Build at: 2026-10-03T18:54:30.626Z - Hash: fb2a8f9bf30a1c13f4c3 - Time: 21833ms
 
 ### Angular 12
 
-- Goal: upgrade from Angular 11 to Angular 12.
-- Command:
+- Goal: upgrade from Angular 11 to Angular 12 while preserving a consistent toolchain and eliminating the peer mismatch left behind by the earlier partial update attempt.
+- Command used:
 
 ```powershell
-ng update @angular/core@12 @angular/cli@12 --force
+npx ng update @angular/core@12 @angular/cli@12 --allow-dirty
 ```
 
-- To document:
-  - Angular 12 package versions
-  - Ivy/zone changes or deprecations
-  - build/test issues
-  - code modifications required
+- Resulting dependency state after the upgrade attempt:
+  - `@angular/core` aligned to `12.2.17`
+  - `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` aligned to `12.2.17`
+  - `@angular/cli` aligned to `12.2.18`
+  - `@angular-devkit/build-angular` aligned to `12.2.18`
+  - `@angular/cdk` aligned to `12.2.13`
+  - `@angular/language-service` aligned to `12.2.17`
+  - `zone.js` aligned to `0.11.8`
+  - TypeScript remained on `4.3.5`
+- Error encountered during dependency resolution:
+
+```text
+npm ERR! code ERESOLVE
+npm ERR! While resolving: customer-portal-app@0.0.1
+npm ERR! Found: @angular-devkit/build-angular@0.1102.19
+npm ERR! Could not resolve dependency:
+npm ERR! dev @angular-devkit/build-angular@"0.1102.19" from the root project
+npm ERR! Conflicting peer dependency: @angular/compiler-cli@11.2.14
+```
+
+- Root cause:
+  - the workspace still had mixed Angular 10/11/12 package references in the manifest
+  - `@angular/compiler`, `@angular/core`, `@angular/cli`, `build-angular`, and `cdk` were not all on the same version family
+  - there was also a transitive type mismatch created by newer `@types/eslint` / `@types/estree` packages
+- Type issue discovered while resolving the install:
+
+```text
+error TS2315: Type 'Server' is not generic.
+```
+
+- Diagnosis for the type mismatch:
+  - `@types/ws` was being pulled in at a newer version by transitive dependencies
+  - that newer type definition is incompatible with the project’s TypeScript 4.3.5 toolchain
+- Fix applied:
+
+```json
+"overrides": {
+  "@types/ws": "7.4.5",
+  "@types/eslint": "8.56.0",
+  "@types/estree": "1.0.9"
+}
+```
+
+- Validation after the fix:
+
+```powershell
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+Remove-Item -Force package-lock.json -ErrorAction SilentlyContinue
+npm install
+npm run build
+```
+
+- Result:
+  - clean install succeeded
+  - Angular 12 build succeeded
+  - output included the production bundle generation and a successful build timestamp
+  - remaining warnings were only Sass slash-division deprecations, which are non-blocking warnings during the Angular 12 toolchain
 
 ### Angular 13
 
