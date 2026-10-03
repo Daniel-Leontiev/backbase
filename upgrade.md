@@ -352,8 +352,6 @@ This is a good example of a real component-level change: the app was not rewritt
 
 ### Angular 15
 
-### Angular 15
-
 - Goal: upgrade from Angular 14 to Angular 15 with the Angular CLI migration set applied and the project revalidated on the updated toolchain.
 - Command used:
 
@@ -384,13 +382,6 @@ npm run build
   - output included the Angular 15 bundle generation and a final `Build at: ...` success timestamp
   - Angular CLI reported that some older Browserslist browsers were ignored because ES5 output is no longer supported, which is expected for Angular 15
   - the only warnings left were non-blocking CommonJS optimization warnings for `lodash` and `moment`
-
-### Angular 16
-
-- To document:
-  - package updates
-  - compile or test issues
-  - deprecated API replacements
 
 ### Angular 16
 
@@ -425,24 +416,49 @@ npm run build
 
 ### Angular 17
 
-- To document:
-  - dependency and builder changes
-  - build warnings or errors
-  - any code fixes or config changes
-
-### Angular 17
-
-- Goal: upgrade from Angular 16 to Angular 17.
-- Command:
+- Goal: upgrade from Angular 16 to Angular 17 and fix the zone.js import path required by the modern package exports.
+- Command used:
 
 ```powershell
-ng update @angular/core@17 @angular/cli@17 --force
+npx ng update @angular/core@17 @angular/cli@17 --allow-dirty --force
 ```
 
-- To document:
-  - Angular 17 package versions
-  - any config and build updates
-  - final validation results
+- Dependency updates applied by the migration:
+  - `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/router`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/compiler`, and `@angular/compiler-cli` updated to `17.3.12`
+  - `@angular/cli` updated to `17.3.17`
+  - `@angular-devkit/build-angular` updated to `17.3.17`
+  - `@angular/animations` updated to `17.3.12`
+  - `@angular/language-service` updated to `17.3.12`
+  - `zone.js` updated from `0.13.3` to `0.14.10`
+  - `typescript` updated from `4.9.5` to `5.4.5`
+- Angular CLI migration actions completed automatically:
+  - updated `angular.json` to remove deprecated CLI options
+  - updated the Angular 17 builder and browser configuration defaults
+- Build issue encountered:
+
+```text
+./src/polyfills.ts:47:0-27 - Error: Module not found: "./dist/zone" is not exported under the conditions ... from package .../node_modules/zone.js
+```
+
+- Root cause:
+  - the App was still importing `zone.js/dist/zone`, which is no longer exported in the current `zone.js` package layout
+- Fix applied:
+
+```ts
+import 'zone.js';
+```
+
+- Validation performed:
+
+```powershell
+npm run build
+```
+
+- Result:
+  - build succeeded
+  - output included Angular 17 bundle generation and a final `Build at: ...` success timestamp
+  - Angular CLI still warns that some legacy Browserslist targets are ignored because ES5 output is no longer supported, which is expected for Angular 17
+  - the only remaining output was a non-blocking CommonJS optimization warning for `lodash` and `moment`
 
 ### Angular 18
 
